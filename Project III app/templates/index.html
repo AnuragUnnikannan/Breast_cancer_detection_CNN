@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel="shortcut icon" href="static/ribbon.png" type="image/x-icon">
+    <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="static/app.css">
+
+    <script src="static/index.js"></script>
+
+
+
+    <title>HOME | Breast Cancer Detection</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="nev">
+                <div class="logo">
+                    <a href=""><img src="static/ribbon.png" alt=""></a>
+                    <p id="hashtag"></p>
+                    <script src="static/lib/typed.js"></script>
+                    <script>
+                        var typed = new Typed("#hashtag", {
+                            strings: [
+                                "#breastcancer",
+                                "#breastcancerawareness",
+                                "#pinkribbon",
+                                "#cancersucks"
+                            ],
+                            typeSpeed: 50,
+                            backSpeed: 50,
+                            loop: true,
+                        });
+                    </script>
+                </div>
+
+                <div class="react">
+                    <i class="fa fa-search"></i>
+                    <i class="fa fa-heart-o"></i>
+                    <i class="fa fa-plus"></i>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="main-block">
+                    <p>Detects Breast cancer using Modern Deep Learning</p>
+                    <h4>already <span style="color:rgb(255, 0, 128);">{{count}}</span> Images successfully predected.
+                    </h4>
+                    <a href="" class="main-btn">Check Out</a>
+                </div>
+                <div class="side-block">
+                    <img src="static/heart.jpg" alt="">
+                    <p>Learn more about <a href="https://www.nationalbreastcancer.org/about-breast-cancer/"> Breast
+                            cancer</a>.</p>
+                </div>
+            </div>
+            {% if result %}
+            <div class="partition" id="par1"></div>
+            <div class="conf" id="conf">
+                <i class="fa fa-close" onclick="close_result()"></i>
+            </div>
+            <div class="result" id="result">
+                <img src="https://i.gifer.com/Ij0J.gif" alt="">
+                <div class="rcard">
+                    <br>
+                    <p>OUR PREDECTION</p>
+                    <p class="card-number">{{result}}</p>
+                    <img src="data:image/jpeg;base64,{{ image }}" alt="" id="loaded">
+                    <p class="card-date" id="card-date"></p>
+                </div>
+                <script>
+                    const d = new Date();
+                    let string = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+                    document.getElementById("card-date").innerHTML = string;
+                </script>
+            </div>
+            <div class="feed" id="feed">
+                <p>Liked our service? We would like to recive feedback from you.</p>
+                <div class="feed-btn">
+                    <a href="">[Yes]</a>
+                    <a onclick="close_feed()">[No Thanks]</a>
+                </div>
+            </div>
+            <div class="partition"></div>
+            {% endif %}
+            <h2 id="step">Step1 : Put Mammogram Image</h2>
+            <form action="" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                <label for="image"><img src="static/plus.png" alt="" id="preview"></label>
+                <input type="file" name="image" id="image" accept=".jpg,.png,.jpeg" onchange="dispimg(this)">
+                <input type="submit" id="submit" value="Predict">
+            </form>
+
+
+
+
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
